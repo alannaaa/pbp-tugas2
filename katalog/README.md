@@ -19,3 +19,20 @@ Lihat hasil deploy aplikasi Katalog [di sini](https://pbp-tugas2-alanna.herokuap
 Ya, tanpa menggunakan _virtual environment_, kita tetap dapat membuat aplikasi web berbasis Django. Namun, seperti yang sudah dibahas sebelumnya, _practice_ ini tidak direkomendasikan dan tidak menguntungkan bagi kita.
 
 ## Implementasi poin 1–4
+1. **Membuat fungsi pada `views.py`**<br>
+Saya menambahkan function bernama `show_katalog` pada template yang akan mengakses data dari model (`CatalogItem` dari `katalog/models`) serta membuat variabel yang diperlukan (nama, npm). Data `CatalogItem` yang disimpan ke dalam `list` serta variabel-variabel tadi disimpan dalam dictionary bernama `context`. Fungsi ini mengembalikan HttpResponse dengan memanggil fungsi render dan mengikutsertakan `context` di dalamnya.
+2. **Routing (`urls.py`)**<br>
+Pada file  `urls.py` yang terletak di folder utama (project_django), ditambahkan route `/katalog` yang akan di-handle oleh file `katalog/urls.py` dengan menambahkan potongan kode berikut pada list `urlpatterns`
+   
+   ```
+    ...
+    path('katalog/', include('katalog.urls')),
+    ...
+   ```
+   File `katalog/urls.py` kemudian akan menjalankan function `show_katalog` yang terdapat di file `katalog/views.py`
+
+3. **Memetakan data ke HTML (`katalog.html`)**<br>
+Function render yang dipanggil fungsi `show_katalog` menerima argumen bahwa _template name_-nya yaitu `katalog.html`. Pada template ini, saya menggunakan kembali variabel dari `context` dengan menggunakan `{{nama}}`, `{{student_id}}`, kemudian mengiterasi list `list_barang` yang berisi data barang dengan for loop dan menampilkannya pada tabel sesuai urutan.
+
+4. **Deploy ke Heroku**<br>
+Di Heroku, saya membuat aplikasi baru dan menghubungkannya dengan repository github yang bersangkutan dengan aplikasi. Kemudian, saya menambahkan Repository Secrets berupa API key Heroku saya serta nama aplikasi yang akan saya gunakan pada repository tersebut.  Setelah menjalankan kembali _workflow_ yang gagal, aplikasi pun ter-deploy!
