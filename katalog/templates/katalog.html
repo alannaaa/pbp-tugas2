@@ -22,12 +22,12 @@
     {% comment %} Add the data below this line {% endcomment %}
     {% for item in list_barang %}
     <tr>
-        <th>{{item.item_name}}</th>
-        <th>{{item.item_price}}</th>
-        <th>{{item.item_stock}}</th>
-        <th>{{item.rating}}</th>
-        <th>{{item.description}}</th>
-        <th>{{item.item_url}}</th>
+        <td style='text-align:center; vertical-align:middle'>{{item.item_name}}</td>
+        <td style='text-align:center; vertical-align:middle'>{{item.item_price}}</td>
+        <td style='text-align:center; vertical-align:middle'>{{item.item_stock}}</td>
+        <td style='text-align:center; vertical-align:middle'>{{item.rating}}</td>
+        <td style='text-align:center; vertical-align:middle'>{{item.description}}</td>
+        <td style='text-align:center; vertical-align:middle'>{{item.item_url}}</td>
     </tr>
     {% endfor %}
   </table>
