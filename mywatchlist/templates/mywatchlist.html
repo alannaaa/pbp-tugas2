@@ -3,23 +3,25 @@
  {% block content %}
 
   <h1 style="font-family:system-ui">My Watchlist</h1>
-
+  <h3 style="font-family:system-ui">By: {{name_id}}</h3>
+  <h2 style="font-family:system-ui">{{display_text}}</h2>
+  
   <table style="width:100%; font-family:system-ui">
-    <tr>
-      <th style="font-size:140%;">Title</th>
-      <th style="font-size:140%;">Release Date</th>
-      <th style="font-size:140%;">Watched</th>
-      <th style="font-size:140%;">Rating</th>
-      <th style="font-size:140%;">Review</th>
+    <tr style="font-size:140%;">
+      <th>Title</th>
+      <th>Release Date</th>
+      <th>Watched</th>
+      <th>Rating</th>
+      <th>Review</th>
     </tr>
     {% comment %} Add the data below this line {% endcomment %}
     {% for item in movie_list %}
-    <tr>
-        <td style='text-align:center; vertical-align:middle'>{{item.title}}</td>
-        <td style='text-align:center; vertical-align:middle'>{{item.release_date}}</td>
-        <td style='text-align:center; vertical-align:middle'>{{item.watched}}</td>
-        <td style='text-align:center; vertical-align:middle'>{{item.rating}}</td>
-        <td style='text-align:center; vertical-align:middle; width:50%'>{{item.review}}</td>
+    <tr style='text-align:center; vertical-align:middle'>
+        <td>{{item.title}}</td>
+        <td>{{item.release_date}}</td>
+        <td>{{item.watched}}</td>
+        <td>{{item.rating}}</td>
+        <td style='width:50%'>{{item.review}}</td>
     </tr>
     {% endfor %}
   </table>
