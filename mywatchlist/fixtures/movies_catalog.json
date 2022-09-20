@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "title": "Her",
+            "release_date":  "March 12, 2014",
+            "watched": false,
+            "rating": 4,
+            "review":  "Sweet, soulful, and smart, Spike Jonze's Her uses its just-barely-sci-fi scenario to impart wryly funny wisdom about the state of modern human relationships."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "title": "Little Women",
+            "release_date":  "February 7, 2020",
+            "watched": true,
+            "rating": 4,
+            "review": "With a stellar cast and a smart, sensitive retelling of its classic source material, Greta Gerwig's Little Women proves some stories truly are timeless."
+        }
+    },   
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "title": "Fantastic Mr. Fox",
+            "release_date":  "November 13, 2009",
+            "watched": true,
+            "rating": 5,
+            "review": "Fantastic Mr. Fox is a delightfully funny feast for the eyes with multi-generational appeal -- and it shows Wes Anderson has a knack for animation."
+        }
+    },   
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "title": "Charlotte's Web",
+            "release_date":  "December 15, 2006",
+            "watched": false,
+            "rating": 2,
+            "review": "Kids will be entertained by the straightforward plot and cute animals, and adults will be charmed by how quiet and humble the production is, a fine translation of E.B. White's genteel prose."
+        }
+    },   
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "title": "Legally Blonde",
+            "release_date":  "October 12, 2001",
+            "watched": true,
+            "rating": 3,
+            "review": "Though the material is predictable and formulaic, Reese Witherspoon's funny, nuanced performance makes this movie better than it would have been otherwise."
+        }
+    },      
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "title": "Footloose",
+            "release_date":  "February 17, 1984",
+            "watched": false,
+            "rating": 2,
+            "review": "There's not much dancing, but what's there is great. The rest of the time, Footloose is a nice hunk of trashy teenage cheese."
+        }
+    },   
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "title": "Perfect Blue",
+            "release_date":  "February 28, 1998",
+            "watched": true,
+            "rating": 5,
+            "review": "Perfect Blue is overstylized, but its core mystery is always compelling, as are the visual theatrics."
+        }
+    }, 
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "title": "In the Tall Grass",
+            "release_date":  "September 20, 2019",
+            "watched": false,
+            "rating": 1,
+            "review": "A potentially intriguing premise is rapidly lost in the weeds during In the Tall Grass which struggles to stretch its slim source material to feature length."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "title": "The Room",
+            "release_date":  "June 27, 2003",
+            "watched": true,
+            "rating": 1,
+            "review": "A bona fide classic of midnight cinema, Tommy Wiseau's misguided masterpiece subverts the rules of filmmaking with a boundless enthusiasm that renders such mundanities as acting, screenwriting, and cinematography utterly irrelevant."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "title": "Kill Bill: Vol. 2",
+            "release_date":  "July 14, 2004",
+            "watched": true,
+            "rating": 3,
+            "review": "Kill Bill: Volume 2 adds extra plot and dialogue to the action-heavy exploits of its predecessor, while still managing to deliver a suitably hard-hitting sequel."
+        }
+    }
+]
