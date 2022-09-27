@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<title>Todolist</title>
+{% endblock meta %}
+
  {% block content %}
   <style>
     * {
@@ -14,7 +18,8 @@
       border-collapse: collapse;
       padding: 5px;
       text-align: left; 
-      vertical-align: middle
+      vertical-align: middle;
+      table-layout:fixed;
     }
     th {
       color: rgb(50, 50, 50);
@@ -36,28 +41,30 @@
 
   <table>
     <tr style="font-size:120%;">
-      <th>Date Added</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Edit</th>
+      <th style="width:150px;">Date Added</th>
+      <th style="width:230px;">Title</th>
+      <th style="width:400px;">Description</th>
+      <th style="width:200px">Status</th>
+      <th style="width:70px">Edit</th>
     </tr>
+
     {% comment %} Add the data below this line {% endcomment %}
     {% for task in todolist %}
     <tr style="font-size:110%">
         <td>{{ task.date }}</td>
-        <td style="width:20%; font-weight:700;">{{ task.title }}</td>
-        <td style="width:35%">{{ task.description }}</td>
-        <td style="width:22%">
+        <td style="white-space:normal; font-weight:700;">{{ task.title }}</td>
+        <td style="white-space:normal">{{ task.description }}</td>
+        <td>
           {% if task.is_finished %} ✅ Done
           {% else %} 🔴 To do
           {% endif %}
           <button><a href="{% url 'todolist:change_status' task.id %}">Change Status</a></button>
         </td>
-        <td style="width:10%"><button><a href="{% url 'todolist:delete_task' task.id %}">Delete</a></button></td>
+        <td><button><a href="{% url 'todolist:delete_task' task.id %}">Delete</a></button></td>
     </tr>
     {% endfor %}
   </table>
+  
   </br>
   </br>
   <button><a href="{% url 'todolist:logout' %}">Logout</a></button>

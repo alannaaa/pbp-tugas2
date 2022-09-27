@@ -2,7 +2,7 @@
 
 {% block meta %}
 
-<title>Login</title>
+<title>Login | Todolist</title>
 {% endblock meta %}
 
 {% block content %}
@@ -24,7 +24,7 @@
       border-radius: 1em;
     }
     a, a.visited {
-      color: black;
+      color: blue;
     }
 </style>
 
@@ -61,7 +61,7 @@
     {% endif %}
 
     </br>
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+    Don't have an account yet? <a href="{% url 'todolist:register' %}">Register</a>
 
 </div>
 
