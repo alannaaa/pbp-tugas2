@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Tambah Task Baru</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+    * {
+        font-family: system-ui;
+    }
+    h1 {
+        text-align: center; 
+        vertical-align: middle
+    }
+    form {
+        margin: auto;
+        width: 400px;
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 1em;
+    }
+</style>
+<div class = "create-task">
+
+    <h1>✍🏼 Create New Task</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Task Title: </td>
+                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Description: </td>
+                <td><textarea type="text" name="description" placeholder="Description" class="form-control"></textarea></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Create Task"/></td>  
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+{% endblock content %}

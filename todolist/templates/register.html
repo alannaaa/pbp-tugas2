@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Registrasi Akun</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<style>
+    * {
+      font-family: system-ui;
+      text-align: left; 
+      vertical-align:text-top;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      margin: auto;
+      width: 800px;
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 1em;
+      font-size: small;
+    }
+    th {
+      font-size: large;
+    }
+    
+</style>
+
+
+<div class = "login">
+    
+    <h1>Create new account</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <td></td>
+                <td><input style="font-size:medium" type="submit" name="submit" value="Register"/></td>  
+            </table>  
+        </form>
+        
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
