@@ -16,7 +16,7 @@ from django.urls import reverse
 def show_todolist(request):
     user = request.user
     context = {
-        "username" : request.user.username,
+        "username" : user.username,
         "todolist" : Task.objects.filter(user=user),
     }
     return render(request, "todolist.html", context)
@@ -70,7 +70,7 @@ def create_task(request):
 
         return HttpResponseRedirect(reverse('todolist:show_todolist'))
 
-    return render(request, 'create-task.html')
+    return render(request, 'create_task.html')
 
 def change_status(request, id):
     task = Task.objects.get(id = id)
