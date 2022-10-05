@@ -7,61 +7,69 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans">
 <style>
-    * {
-      font-family: system-ui;
-      text-align: center; 
-      vertical-align: middle;
-    }
-    td, input {
-      text-align: left; 
-    }
-    form {
-      margin: auto;
-      width: 400px;
-      padding: 1em;
-      border: 1px solid #ccc;
-      border-radius: 1em;
-    }
-    a, a.visited {
-      color: blue;
-    }
+  * {
+    font-family: "Work Sans";
+    text-align:center;
+    vertical-align: middle;
+    color: #2e3c4d;
+  }
+  td, input {
+    text-align: left; 
+  }
+  form {
+    border-radius:0.5em; 
+    box-shadow: 0px 0px 7px rgba(128, 128, 128, 0.211);   
+    background-color: rgba(178, 178, 178, 0.211);   
+    margin: auto;
+    width: 270px;
+    padding: 1em;
+    border-radius: 1em;
+  }
+  h1, a, a.visited {
+    color:#413f76;
+  }
+  body {
+    background-image: url(https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg);
+  }
+  .login {
+    padding: 10%;
+  }
 </style>
 
-<div class = "login">
-
-    <h1>Login</h1>
-
+<div class="login">
+  <h1>Login</h1>
     <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td>Username: </td>
+          <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+        </tr>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <tr>
+          <td>Password: </td>
+          <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+        </tr>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <tr>
+          <td></td>
+          <td><input class="btn login_btn" type="submit" value="Login"></td>
+        </tr>
+      </table>
     </form>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-    </br>
-    Don't have an account yet? <a href="{% url 'todolist:register' %}">Register</a>
+  </br>
+  <p>Don't have an account yet? <a href="{% url 'todolist:register' %}">Register</a></p>
 
 </div>
 

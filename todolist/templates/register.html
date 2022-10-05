@@ -6,50 +6,84 @@
 
 {% block content %}  
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans">
+
 <style>
-    * {
-      font-family: system-ui;
-      text-align: left; 
-      vertical-align:text-top;
-    }
+  * {
+    font-family: "Work Sans";
+    text-align: left; 
+    vertical-align:text-top;
+  }
+  h1 {
+    text-align: center;
+    color:#413f76;
+    padding-bottom:3%;
+  }
+  th {
+    font-size:20px;
+  }
+  @media screen and (max-width: 490px) {
     h1 {
-      text-align: center;
-    }
-    form {
-      margin: auto;
-      width: 800px;
-      padding: 1em;
-      border: 1px solid #ccc;
-      border-radius: 1em;
-      font-size: small;
+      font-size:7vw;
     }
     th {
-      font-size: large;
+      font-size:4vw;
     }
-    
+    td {
+      font-size:3vw;
+    }
+  }
+
+  body {
+    background-image: url(https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg);
+  }  
+  form {
+    margin:auto; 
+    width: 70%; 
+    padding: 1%; 
+    border-radius: 1em; 
+    font-size: small; 
+    background-color: rgba(204, 204, 204, 0.277); 
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.211); 
+  }
+  .register {
+    padding-top: 5%;
+    padding-bottom: 10%;
+  }
+  .login {
+    background-color: rgba(37, 0, 110, 0.554); 
+    border-color: transparent; 
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
+    color: white;
+  }
 </style>
 
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a></a>
+    <a class="btn btn-primary login" href="{% url 'todolist:login' %}">Login</a>
+  </div>
+</nav>
 
-<div class = "login">
+<div class="register">
     
-    <h1>Create new account</h1>  
-
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <td></td>
-                <td><input style="font-size:medium;" type="submit" name="submit" value="Register"/></td>  
-            </table>  
-        </form>
-        
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
+  <h1>Create new account</h1>  
+    <form method="POST"" >  
+      {% csrf_token %}  
+      <table>  
+        {{ form.as_table }}  
+        <td></td>
+        <td><input style="font-size:medium;" type="submit" name="submit" value="Register"/></td>  
+      </table>  
+    </form>
+      
+  {% if messages %}  
+    <ul>   
+      {% for message in messages %}  
+        <li>{{ message }}</li>  
+      {% endfor %}  
+    </ul>   
+  {% endif %}
 
 </div>  
 

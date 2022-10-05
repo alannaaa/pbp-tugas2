@@ -4,69 +4,117 @@
 <title>Todolist</title>
 {% endblock meta %}
 
- {% block content %}
-  <style>
-    * {
-      font-family: system-ui;
-      text-align: center; 
-      vertical-align: middle
-    }
+{% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans">
+<style>
+  * {
+    font-family: "Work Sans";
+    color: #2e3c4d;
+    text-align: center;
+  }
+  h1 {
+    color:#413f76;
+  }
+  body {
+    background-image: url(https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg);
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.2); 
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.211); 
+    backdrop-filter: blur(30px);
+    border-radius: 1em;
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    cursor: pointer;
+  }
+  .card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+  .card-title {
+    font-family: system-ui;
+    font-weight: bold;
+  }
+  .card-text {
+    font-family: system-ui;
+    font-size: 90%;
+  }
+  .done {
+    background-color: rgba(37, 165, 97, 0.35);
+    border-color: transparent;
+  }
+  .todo {
+    background-color: rgba(212, 56, 56, 0.38);
+    border-color: transparent;
+    font-weight: 900;
+  }
+  .create {
+    font-weight: 1000;
+    color:rgba(255, 255, 255, 0.966);
+    background-color: #767ae4be;
+    border-color: transparent;
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
 
-    table, th, td {
-      margin: auto;
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px;
-      text-align: left; 
-      vertical-align: middle;
-      table-layout:fixed;
-    }
-    th {
-      color: rgb(50, 50, 50);
-    }
-    a, a.visited {
-      color: black;
-    }
+  }
+  .date {
+    font-size: small;
+    color: #2e3c4d;
+  }
+  .logout {
+    background-color: rgba(255, 255, 255, 0.112); 
+    border-color: rgba(255, 255, 255, 0.112); 
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
+    color: #2e3c4d;
+  } 
+  .delete {
+    background-color:#0000002d;
+    border-color:transparent;
+  }
+  .card-footer {
+    background: transparent;
+    border:0px;
+  }
+  .container {
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-bottom: 7%
+  }
+</style>
 
-  </style>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">👋🏼 Hello, {{ username }}!</a>
+    <a class="btn btn-primary logout" href="{% url 'todolist:logout' %}">Logout</a>
+  </div>
+</nav>
 
+<div style="padding-top: 1%; padding-bottom: 3%;">
+  <h1>To-Do List</h1>
+  <a href="{% url 'todolist:create_task' %}" class="btn btn-primary create">+ Create New Task</a>
+</div>
+</div>
 
-<h2>👋🏼 Hello, {{ username }}!</h2>
-
-<h1>To-Do List</h1>
-  <button><a href="{% url 'todolist:create_task' %}">Create New Task</a></button>
-
-  </br>
-  </br>
-
-  <table>
-    <tr style="font-size:120%;">
-      <th style="width:150px;">Date Added</th>
-      <th style="width:230px;">Title</th>
-      <th style="width:400px;">Description</th>
-      <th style="width:200px">Status</th>
-      <th style="width:70px">Edit</th>
-    </tr>
-
-    {% comment %} Add the data below this line {% endcomment %}
+<div class="container">
+  <!-- cards -->
+  <div class="row">
     {% for task in todolist %}
-    <tr style="font-size:110%">
-        <td>{{ task.date }}</td>
-        <td style="white-space:normal; font-weight:700;">{{ task.title }}</td>
-        <td style="white-space:normal">{{ task.description }}</td>
-        <td>
-          {% if task.is_finished %} ✅ Done
-          {% else %} 🔴 To do
-          {% endif %}
-          <button><a href="{% url 'todolist:change_status' task.id %}">Change Status</a></button>
-        </td>
-        <td><button><a href="{% url 'todolist:delete_task' task.id %}">Delete</a></button></td>
-    </tr>
+      <div class="col-md-6 col-lg-3 mb-3">
+        <div class="card">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ task.title }}</h5>
+            <p class="card-text mb-1 date">{{ task.date }}</p>
+            <p class="card-text">{{ task.description }}</p>
+            <div class="mt-auto">
+              <a href="{% url 'todolist:delete_task' task.id %}" class="btn btn-primary delete mb-2">Delete</a>
+              {% if task.is_finished %}
+                <a href="{% url 'todolist:change_status' task.id %}" class="btn btn-primary done mb-2">Done</a>
+              {% else %}
+                <a href="{% url 'todolist:change_status' task.id %}" class="btn btn-primary todo mb-2">To Do</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
-  </table>
-  
-  </br>
-  </br>
-  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-
+  </div>
+</div>
  {% endblock content %}

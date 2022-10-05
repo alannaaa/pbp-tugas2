@@ -67,9 +67,7 @@ def create_task(request):
             description = task.get("description"),
             is_finished = False,
         )
-
         return HttpResponseRedirect(reverse('todolist:show_todolist'))
-
     return render(request, 'create_task.html')
 
 def change_status(request, id):
