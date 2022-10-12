@@ -1,7 +1,7 @@
 import datetime
 from django.shortcuts import render
 from todolist.models import Task
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -79,3 +80,32 @@ def change_status(request, id):
 def delete_task(request, id):
     Task.objects.get(id = id).delete()
     return HttpResponseRedirect(reverse('todolist:show_todolist'))
+
+def show_json(request):
+    data = Task.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def create_json(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        task = Task.objects.create(
+            title = title, 
+            description = description,
+            date = datetime.date.today(), 
+            is_finished = False, 
+            user=request.user
+            )
+
+        result = {
+            'fields':{
+                'title':task.title,
+                'description':task.description,
+                'is_finished':task.is_finished,
+                'date':task.date,
+            },
+            'id':task.id
+        }
+
+        return JsonResponse(result)
