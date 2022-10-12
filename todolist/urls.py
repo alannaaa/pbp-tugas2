@@ -12,5 +12,5 @@ urlpatterns = [
     path('change/<int:id>', change_status, name='change_status'),
     path('delete/<int:id>', delete_task, name='delete_task'),
     path('json/', show_json, name='show_json'),
-    path('ajax/submit/', show_json, name='show_json'),
+    path('add/', create_json, name='create_json'),
 ]

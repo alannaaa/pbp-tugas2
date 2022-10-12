@@ -99,13 +99,13 @@ def create_json(request):
             )
 
         result = {
+            'id':task.id,
             'fields':{
                 'title':task.title,
                 'description':task.description,
                 'is_finished':task.is_finished,
                 'date':task.date,
-            },
-            'id':task.id
+            }
         }
 
         return JsonResponse(result)

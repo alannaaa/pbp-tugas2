@@ -6,56 +6,63 @@
 
 {% block content %}
 <!doctype html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        $.get("https://localhost:8000/todolist/json/", function(data) {
+        $.get("/todolist/json/", function(data) {
             for (i=0; i<data.length; i++){
                 $("#todolist").append(`
-                  <div class="col-md-6 col-lg-3 mb-3">
-                    <div class="card">
+                <div id="${data[i].id}--task" class="col-md-6 col-lg-3 mb-3">
+                    <div class="card d-flex">
                       <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${data[i].fields.title}</h5>
                         <p class="card-text mb-1 date">${data[i].fields.date}</p>
                         <p class="card-text">${data[i].fields.description}</p>
                         <div class="mt-auto">
-                          <a href="todolist/delete_task/${data[i].id}" class="btn btn-primary delete mb-2">Delete</a>
+                          <a href="/todolist/delete/${data[i].id}" class="btn btn-primary delete mb-2">Delete</a>
                           ${data[i].fields.is_finished ?
-                            `<a href="todolist/change_status/${data[i].id}" class="btn btn-primary done mb-2">Done</a>` :
-                            `<a href="todolist/change_status/${data[i].id}" class="btn btn-primary todo mb-2">To Do</a>`}}
+                            `<a href="/todolist/change/${data[i].id}" class="btn btn-primary done mb-2">Done</a>` :
+                            `<a href="/todolist/change/${data[i].id}" class="btn btn-primary todo mb-2">To Do</a>`}
                         </div>
                       </div>
                     </div>
-                  </div>`
-                )
+                </div>`)
             }
         });
 
+
         $("#submit_btn").click(function(){
-            $.post("https://localhost:8000/ajax/submit/", {
-                title: $("#title").val(),
-                deskripsi:$("#description").val()
-              }),
-            function(response, status){
+          $.post("/todolist/add/", {
+            title: $("#title").val(),
+            description: $("#description").val()
+          },
+          function(result, status){
+                if (status == 'success') {
                 $("#todolist").append(`
-                    <div class="col-md-6 col-lg-3 mb-3">
+                <div id="${result.id}--task" class="col-md-6 col-lg-3 mb-3">
                       <div class="card">
                         <div class="card-body d-flex flex-column">
-                          <h5 class="card-title">${response.fields.title}</h5>
-                          <p class="card-text mb-1 date">${response.fields.date}</p>
-                          <p class="card-text">${response.fields.description}</p>
+                          <h5 class="card-title">${result.fields.title}</h5>
+                          <p class="card-text mb-1 date">${result.fields.date}</p>
+                          <p class="card-text">${result.fields.description}</p>
                           <div class="mt-auto">
-                            <a href="todolist/delete_task/${response.id}" class="btn btn-primary delete mb-2">Delete</a>
-                            ${response.fields.is_finished ?
-                              `<a href="todolist/change_status/${response.id}" class="btn btn-primary done mb-2">Done</a>` :
-                              `<a href="todolist/change_status/${response.id}" class="btn btn-primary todo mb-2">To Do</a>`}}
+                            <a href="/todolist/delete/${result.id}" class="btn btn-primary delete mb-2" >Delete</a>
+                            ${result.fields.is_finished ?
+                              `<a href="/todolist/change/${result.id}" class="btn btn-primary done mb-2">Done</a>` :
+                              `<a href="/todolist/change/${result.id}" class="btn btn-primary todo mb-2">To Do</a>`}
                           </div>
                         </div>
                       </div>
-                    </div>`);
+                  </div>`);
+                $('#title').val('')
+                $('#description').val('')
+                }
             }
+          )
         })
     });
+    
 </script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans">
@@ -131,6 +138,11 @@
     padding-right: 7%;
     padding-bottom: 7%
   }
+  .modal-background-color {
+    border-color: transparent;
+    width: 300px;
+    padding: 1em;
+  }
 </style>
 
 <nav class="navbar navbar-expand-lg">
@@ -141,55 +153,41 @@
 </nav>
 
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <div style="padding-top: 1%; padding-bottom: 3%;">
   <h1>To-Do List</h1>
-  <!-- <a class="nav-link navbar-dark bg-dark cursor-pointer" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task<span class="sr-only navbar-dark bg-dark"></span></a> -->
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-  Launch demo modal
+<button type="button" class="btn btn-primary mb-5 create" data-bs-toggle="modal" data-bs-target="#createTaskModal" data-bs-whatever="@mdo">
+  + Add Task
 </button>
 
 <!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-background-color">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="createTaskModalLabel">Add new task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" style="text-align:left;">
+        {% csrf_token %}
+        <label>Task Title:</label><br>
+        <input id="title" class="appearance-none border rounded py-2 px-3 mx-1 text-zinc-800" type="text" name="title" placeholder="Title"><br>
+        <label>Description:</label><br>
+        <input id="description" class="appearance-none border rounded py-2 px-3 mx-1 text-zinc-800" type="description" name="description" placeholder="Task Description">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="submit_btn" type="button" class="btn btn-primary create" id="add-task" data-bs-dismiss="modal">Add</button>
       </div>
     </div>
   </div>
 </div>
 </body>
 
-<!-- <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
-  <div class="modal-dialog bg-dark" role="document">
-    <div class="modal-content bg-dark">
-      <div class="modal-header"> -->
-        <!-- <h5 class="modal-title text-white" id="createTaskModalLabel">Add Task</h5>
-      </div>
-      <div class="modal-body">
-        {% csrf_token %}
-        <label class="text-white font-bold">Title</label>
-        <input id="title" class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="title" name="title" placeholder="Task Title">
-        <label class="text-white font-bold">Description</label>
-        <input id="description" class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="description" name="description" placeholder="Task Description">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button id="add-task" type="button" class="btn btn-primary" data-bs-dismiss="modal">Add task</button>
-      </div>
-    </div>
-  </div>
-</div> -->
+<div class="row m-2" id="todolist"></div>
+
 
  {% endblock content %}
