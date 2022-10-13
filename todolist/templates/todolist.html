@@ -20,10 +20,10 @@
                         <p class="card-text mb-1 date">${data[i].fields.date}</p>
                         <p class="card-text">${data[i].fields.description}</p>
                         <div class="mt-auto">
-                          <a href="/todolist/delete/${data[i].id}" class="btn btn-primary delete mb-2">Delete</a>
+                          <a href="/todolist/delete/${data[i].pk}" class="btn btn-primary delete mb-2">Delete</a>
                           ${data[i].fields.is_finished ?
-                            `<a href="/todolist/change/${data[i].id}" class="btn btn-primary done mb-2">Done</a>` :
-                            `<a href="/todolist/change/${data[i].id}" class="btn btn-primary todo mb-2">To Do</a>`}
+                            `<a href="/todolist/change/${data[i].pk}" class="btn btn-primary done mb-2">Done</a>` :
+                            `<a href="/todolist/change/${data[i].pk}" class="btn btn-primary todo mb-2">To Do</a>`}
                         </div>
                       </div>
                     </div>
