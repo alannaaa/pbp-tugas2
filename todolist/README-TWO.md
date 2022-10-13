@@ -19,7 +19,7 @@ Pada AJAX diterapkan asynchronous programming di mana request baru dari user yan
 AJAX GET:
 1. Membuat function `show_json` dengan parameter request dan mengembalikan HttpResponse berupa data yang di-serialize dalam bentuk JSON.
 2. Menambahkan `path('json/', show_json, name='show_json'),` pada `url_patterns` di `todolist/urls.py`
-3. Mengambil data dari `/todolist/json/` menggunakan AJAX GET, kemudian membuat card untuk masing-masing data object lalu meng-appendnya ke container yang akan menampilkan seluruh cards. <br>
+3. Mengambil data dari `/todolist/json/` menggunakan AJAX GET, kemudian membuat card untuk masing-masing data object lalu meng-appendnya ke container yang akan menampilkan seluruh cards. </br>
 
 AJAX POST:
 1. Membuat button 'Add Task' yang akan men-trigger modal dengan menghubungkannya ke modal menggunakan `data-bs-toggle = "modal"` dan memasang target-nya ke modal dengan id `createTaskModal` menggunakan `data-bs-target = "#createTaskModal`.
